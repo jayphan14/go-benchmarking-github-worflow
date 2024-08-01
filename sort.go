@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"math/rand"
-	"net/http"
 	_ "net/http/pprof"
 	"os"
 	"runtime/pprof"
@@ -50,15 +49,10 @@ func generateArray(size int) []int {
 }
 
 func MySort(arr []int) []int {
-	return Sort1(arr)
+	return Sort2(arr)
 }
 
 func main() {
-	// Start HTTP server for pprof
-	go func() {
-		log.Println(http.ListenAndServe("localhost:6060", nil))
-	}()
-
 	// Create a file to write the CPU profile to
 	f, err := os.Create("cpu.prof")
 	if err != nil {
