@@ -50,7 +50,7 @@ func generateArray(size int) []int {
 }
 
 func MySort(arr []int) []int {
-	return Sort1(arr)
+	return Sort2(arr)
 }
 
 func main() {
