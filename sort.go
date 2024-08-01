@@ -2,10 +2,9 @@ package main
 
 import (
 	"math/rand"
-	"time"
 )
 
-func BubbleSort(arr []int) {
+func BubbleSort(arr []int) []int {
 	n := len(arr)
 	for i := 0; i < n; i++ {
 		for j := 0; j < n-i-1; j++ {
@@ -14,11 +13,12 @@ func BubbleSort(arr []int) {
 			}
 		}
 	}
+	return arr
 }
 
-func QuickSort(arr []int) {
+func QuickSort(arr []int) []int {
 	if len(arr) < 2 {
-		return
+		return arr
 	}
 	left, right := 0, len(arr)-1
 	pivotIndex := rand.Int() % len(arr)
@@ -32,6 +32,8 @@ func QuickSort(arr []int) {
 	arr[left], arr[right] = arr[right], arr[left]
 	QuickSort(arr[:left])
 	QuickSort(arr[left+1:])
+
+	return arr
 }
 
 func generateArray(size int) []int {
@@ -42,8 +44,6 @@ func generateArray(size int) []int {
 	return arr
 }
 
-func main() {
-	rand.Seed(time.Now().UnixNano())
-	arr := generateArray(10000)
-	BubbleSort(arr)
+func MySort(arr []int) []int {
+	return BubbleSort(arr)
 }
