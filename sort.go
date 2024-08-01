@@ -45,5 +45,5 @@ func generateArray(size int) []int {
 }
 
 func MySort(arr []int) []int {
-	return BubbleSort(arr)
+	return QuickSort(arr)
 }
