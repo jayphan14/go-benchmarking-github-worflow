@@ -1,0 +1,7 @@
+goos: darwin
+goarch: amd64
+pkg: go-benchmark-pipeline
+cpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+BenchmarkMySort-12    	      14	  78474037 ns/op	   81920 B/op	       1 allocs/op
+PASS
+ok  	go-benchmark-pipeline	1.757s
