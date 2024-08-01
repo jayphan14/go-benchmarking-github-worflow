@@ -4,7 +4,7 @@ import (
 	"math/rand"
 )
 
-func BubbleSort(arr []int) []int {
+func Sort1(arr []int) []int {
 	n := len(arr)
 	for i := 0; i < n; i++ {
 		for j := 0; j < n-i-1; j++ {
@@ -16,7 +16,7 @@ func BubbleSort(arr []int) []int {
 	return arr
 }
 
-func QuickSort(arr []int) []int {
+func Sort2(arr []int) []int {
 	if len(arr) < 2 {
 		return arr
 	}
@@ -30,8 +30,8 @@ func QuickSort(arr []int) []int {
 		}
 	}
 	arr[left], arr[right] = arr[right], arr[left]
-	QuickSort(arr[:left])
-	QuickSort(arr[left+1:])
+	Sort2(arr[:left])
+	Sort2(arr[left+1:])
 
 	return arr
 }
@@ -45,5 +45,5 @@ func generateArray(size int) []int {
 }
 
 func MySort(arr []int) []int {
-	return QuickSort(arr)
+	return Sort2(arr)
 }
