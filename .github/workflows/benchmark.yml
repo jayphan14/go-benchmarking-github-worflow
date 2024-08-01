@@ -37,17 +37,7 @@ jobs:
         run: make bench
 
       - name: Check performance regression
-        run: |
-          if [ -f benchmark.txt ]; then
-            # Ensure we have fetched all branches
-            git fetch origin main
-            new_benchmark=$(grep -E "BenchmarkBubbleSort" benchmark.txt | awk '{print $3}' | sed 's/ns\/op//g')
-            old_benchmark=$(git show origin/main:benchmark.txt | grep -E "BenchmarkBubbleSort" | awk '{print $3}' | sed 's/ns\/op//g')
-            if [ $(echo "${new_benchmark} > ${old_benchmark} * 1.2" | bc) -eq 1 ]; then
-              echo "Performance regression detected!"
-              exit 1
-            fi
-          fi
+        run: make check-regression
         shell: /usr/bin/bash -e {0}
         env:
           GOROOT: /opt/hostedtoolcache/go/1.22.5/x64
