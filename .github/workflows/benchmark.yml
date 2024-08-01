@@ -12,11 +12,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Fetch all history for all branches
 
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.22
+          go-version: 1.16
 
       - name: Cache Go modules
         uses: actions/cache@v2
@@ -37,6 +39,8 @@ jobs:
       - name: Check performance regression
         run: |
           if [ -f benchmark.txt ]; then
+            # Ensure we have fetched all branches
+            git fetch origin main
             new_benchmark=$(grep -E "BenchmarkBubbleSort" benchmark.txt | awk '{print $3}' | sed 's/ns\/op//g')
             old_benchmark=$(git show origin/main:benchmark.txt | grep -E "BenchmarkBubbleSort" | awk '{print $3}' | sed 's/ns\/op//g')
             if [ $(echo "${new_benchmark} > ${old_benchmark} * 1.2" | bc) -eq 1 ]; then
@@ -44,3 +48,6 @@ jobs:
               exit 1
             fi
           fi
+        shell: /usr/bin/bash -e {0}
+        env:
+          GOROOT: /opt/hostedtoolcache/go/1.22.5/x64
