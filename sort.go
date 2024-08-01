@@ -45,5 +45,5 @@ func generateArray(size int) []int {
 }
 
 func MySort(arr []int) []int {
-	return Sort2(arr)
+	return Sort1(arr)
 }
